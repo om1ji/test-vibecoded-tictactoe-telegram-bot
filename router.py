@@ -37,8 +37,8 @@ def create_router(config: BotConfig, promo_api: PromoAPIClient) -> Router:
 
         await message.answer(
             "<b>Привет!</b>\n"
-            "Я сопровождаю ваше путешествие в мини-игре <i>TicTacToe</i>."
-            "Нажмите кнопку <b>Играть</b> — она откроет крестики-нолики."
+            "Я сопровождаю ваше путешествие в мини-игре <i>TicTacToe</i>.\n"
+            "Нажмите кнопку <b>Играть</b> — она откроет крестики-нолики.\n"
             "В любой момент используйте /help, чтобы узнать команды.",
             parse_mode="HTML"
         )
@@ -47,8 +47,8 @@ def create_router(config: BotConfig, promo_api: PromoAPIClient) -> Router:
     async def cmd_help(message: Message) -> None:
         await message.answer(
             "<b>Команды бота</b>\n"
-            "/start — показать кнопку запуска мини-приложения.\n"
-            "/promos — список последних промокодов.\n"
+            "/start — показать приветственное сообщение.\n"
+            "/promos — список выигранных промокодов.\n"
             "/help — краткая справка.\n\n"
             "После каждой победы мини-приложение покажет промокод внутри себя, "
             "а мы в боте сохраним историю для вашего удобства.",
