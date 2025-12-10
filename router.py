@@ -19,7 +19,7 @@ def format_history(promos: list[dict]) -> str:
         )
 
     lines = ["<b>Ваши промокоды</b>"]
-    for idx, item in enumerate(promos[:5], start=1):
+    for idx, item in enumerate(promos, start=1):
         code = item.get("code", "????")
         lines.append(f"<b>{idx}.</b> <code>{code}</code>")
     return "\n".join(lines)
@@ -35,31 +35,11 @@ def create_router(config: BotConfig, promo_api: PromoAPIClient) -> Router:
             await message.answer("Не удалось определить пользователя Telegram.")
             return
 
-        payload = {
-            "telegram_id": user.id,
-            "username": user.username,
-            "first_name": user.first_name,
-            "last_name": user.last_name,
-        }
-        web_app_url = build_web_app_url(config.web_app_url, payload)
-        keyboard = ReplyKeyboardMarkup(
-            keyboard=[
-                [
-                    KeyboardButton(
-                        text="Открыть Web App",
-                        web_app=WebAppInfo(url=web_app_url),
-                    )
-                ]
-            ],
-            resize_keyboard=True,
-            one_time_keyboard=False,
-        )
         await message.answer(
             "<b>Привет!</b>\n"
-            "Я сопровождаю ваше путешествие в мини-игре <i>TicTacToe</i>. "
-            "Нажмите кнопку ниже — она откроет WebApp, передаст ваши данные и сохранит "
-            "историю промокодов. В любой момент используйте /help, чтобы узнать команды.",
-            reply_markup=keyboard,
+            "Я сопровождаю ваше путешествие в мини-игре <i>TicTacToe</i>."
+            "Нажмите кнопку <b>Играть</b> — она откроет крестики-нолики."
+            "В любой момент используйте /help, чтобы узнать команды.",
             parse_mode="HTML"
         )
 
